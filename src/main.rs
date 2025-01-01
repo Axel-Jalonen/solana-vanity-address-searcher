@@ -60,13 +60,20 @@ fn main() {
 
         let handle = thread::spawn(move || {
             let mut counter = 0;
+            let start_time = std::time::Instant::now();
             loop {
                 let (private_key, public_key) = get_random_keypair();
                 let mut encoded = Vec::new();
                 bs58::encode(&public_key).onto(&mut encoded).unwrap();
                 counter += 1;
+                let elapsed = start_time.elapsed().as_secs();
+
                 if counter % 1_000_000 == 0 {
-                    println!("Checked {} keys", counter);
+                    println!(
+                        "Checked {} keys. Generating approx {} keys/sec",
+                        counter,
+                        counter / elapsed
+                    );
                 }
                 if encoded.starts_with(&prefix_clone) {
                     println!(
