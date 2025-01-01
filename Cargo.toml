@@ -1,0 +1,10 @@
+[package]
+name = "sol-searcher"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+bs58 = "0.5.1"
+ed25519-dalek = "1.0"
+rand = "0.8.5"
+rand_xoshiro = "0.6.0"
